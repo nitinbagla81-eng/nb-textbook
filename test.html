@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CBT Examination Console - NB Textbook</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Top bar with candidate & timer info -->
+  <header class="exam-header">
+    <div>
+      <strong id="exam-banner-title">Mock Examination</strong>
+      <span style="font-size: 0.8rem; margin-left: 10px; color: #b0bec5;">(75 Questions | Sample Content)</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <button class="lang-btn" id="exam-lang-btn" onclick="toggleExamLanguage()">?????? / English</button>
+      <div class="timer-box">
+        Time Left: <span id="timer-display">60:00</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- CBT Main Body -->
+  <div class="cbt-container">
+
+    <!-- Left: Question & Option Area -->
+    <section class="question-area">
+      <div>
+        <div class="question-meta">
+          <span style="font-weight: 700; color: var(--primary-blue);" id="current-q-label">Question 1 of 75</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);" id="sample-tag">Original Educational Sample Question</span>
+        </div>
+
+        <div class="question-title" id="question-text">Loading question...</div>
+
+        <div class="options-list" id="options-container">
+          <!-- Dynamic options injected here -->
+        </div>
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="cbt-controls">
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-warning" onclick="markForReview()">Mark for Review</button>
+          <button class="btn btn-outline" onclick="clearResponse()">Clear Response</button>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn btn-secondary" id="btn-prev" onclick="prevQuestion()">Previous</button>
+          <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">Save & Next</button>
+          <button class="btn btn-danger" onclick="confirmSubmitTest()">Submit Test</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Question Palette & Overview -->
+    <aside class="palette-area">
+      <div class="palette-legend">
+        <div class="legend-item"><span class="legend-box" style="background: #28a745;"></span> Answered</div>
+        <div class="legend-item"><span class="legend-box" style="background: #dc3545;"></span> Unanswered</div>
+        <div class="legend-item"><span class="legend-box" style="background: #6f42c1;"></span> For Review</div>
+        <div class="legend-item"><span class="legend-box" style="background: #e9ecef;"></span> Not Visited</div>
+      </div>
+
+      <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--primary-blue);">
+        Question Palette (75 Questions)
+      </div>
+
+      <div class="palette-grid" id="palette-container">
+        <!-- 75 Palette Buttons generated via JS -->
+      </div>
+    </aside>
+  </div>
+
+  <!-- Scorecard / Results Modal -->
+  <div class="modal-overlay" id="result-modal">
+    <div class="modal-card">
+      <h2 style="color: var(--primary-blue); border-bottom: 2px solid var(--light-blue); padding-bottom: 0.5rem;">
+        Performance Scorecard
+      </h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">
+        Assessment generated instantly on your device.
+      </p>
+
+      <div class="result-grid">
+        <div class="metric-card">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Total Questions</div>
+          <div class="metric-number" id="res-total">75</div>
+        </div>
+        <div class="metric-card">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Correct Answers</div>
+          <div class="metric-number" style="color: var(--success);" id="res-correct">0</div>
+        </div>
+        <div class="metric-card">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Incorrect Answers</div>
+          <div class="metric-number" style="color: var(--danger);" id="res-incorrect">0</div>
+        </div>
+        <div class="metric-card">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Unanswered</div>
+          <div class="metric-number" style="color: var(--text-muted);" id="res-unanswered">75</div>
+        </div>
+        <div class="metric-card">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Net Score</div>
+          <div class="metric-number" style="color: var(--accent-blue);" id="res-score">0.00</div>
+        </div>
+        <div class="metric-card">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Accuracy</div>
+          <div class="metric-number" style="color: var(--purple);" id="res-accuracy">0%</div>
+        </div>
+      </div>
+
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        *Scoring Formula: Standard +1 for correct answer, -0.33 deduction for incorrect answer (negative marking).
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <a href="index.html" class="btn btn-primary" style="text-decoration: none;">Return to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/exam.js"></script>
+</body>
+</html>
